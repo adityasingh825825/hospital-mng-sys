@@ -1,14 +1,14 @@
 ## Hospital Management System
 
 ### Features implemented:
-• Doctor Database and its login( doctor’s interface)
-• Patient Database and its login(Patient’s interface)
-• Prescription Management
-• Appointment Management
-• Patient Medical History
-• Patient Medical Files Archive
-• Prescription
-• Receptionist Database and its login(Receptionist interface)
+- Doctor Database and its login( doctor’s interface)
+- Patient Database and its login(Patient’s interface)
+- Prescription Management
+- Appointment Management
+- Patient Medical History
+- Patient Medical Files Archive
+- Prescription
+- Receptionist Database and its login(Receptionist interface)
 
 ### Prerequisite
 Python 3
