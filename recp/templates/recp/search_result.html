@@ -1,0 +1,9 @@
+{% if results %}
+  <ul>
+  {% for result in results %}
+    <a href="{% url 'profile_view' result.profile.id %}" target="_blank"><li>{{ result.first_name }} {{ result.last_name}}</li></a>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No users found.</p>
+{% endif %}

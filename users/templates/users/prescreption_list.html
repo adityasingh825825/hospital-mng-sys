@@ -1,0 +1,50 @@
+{% extends 'frontend/base.html' %}
+{% block content%}
+<div class="mb-3">
+  {% if user.profile.registered_as == "Doc" %}
+  <a href="{% url 'create_prescreption' %}" class="btn btn-primary btn-block">Create Prescreption</a>
+  {% endif %}
+</div>
+    {% for prescreption in prescreptions  %}
+    <article class="media content-section">
+    <div class="media-body">
+      {% if user.profile.registered_as == "Doc" %}
+        <div class="article-metadata">
+          Patient Name:
+        <a class="mr-2">{{ prescreption.patient_name }}</a>
+      {% else %}
+      <div class="article-metadata">
+        Doctor Name:
+      <a class="mr-2">{{ prescreption.doctor_name }}</a>
+      {% endif %}
+        <small class="text-muted">{{ prescreption.date_added|date:'F d, Y' }}</small>
+        </div>
+        <h2 class="article-title">{{ prescreption.symptoms }}</h2>
+        <p class="article-content">{{ prescreption.prescreption }}</p>
+    </div>
+    </article>
+    {% endfor %}
+
+
+  {% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{page_obj.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{num}}">{{num}}</a>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{num}}">{{num}}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+  {% endif %}
+{% endblock content %}

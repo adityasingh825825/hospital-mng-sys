@@ -1,0 +1,101 @@
+{% extends 'frontend/base.html' %}
+{% load crispy_forms_tags %}
+{% block content%}
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+
+
+    <div class="">
+        <table>
+            <h3>Patients</h3>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Update</th>
+                <th>Remove</th>
+            </tr>
+            {% for patient in patients %}
+                <tr>                
+                    <td>
+                        {{patient.user.first_name}}
+                        {{patient.user.last_name}}
+                    </td>
+                    <td>
+                        {{patient.phone}}
+                    </td>
+                    <td>
+                        {{patient.user.email}}
+                    </td>
+                    <td>
+                        {{patient.gender}}
+                    </td>
+                    <td>
+                        {{patient.age}}
+                    </td>
+                    <td>
+                        <a href="{% url 'profile_view' patient.id %}">Update</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'patient_delete' patient.user.id %}">Delete</a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            
+        </table>
+    </div>        
+    <div style="margin-top: 20px;">
+        <table>
+            
+            <a class="btn btn-primary btn-lg btn-block" href="{% url 'create_appointment' %}" role="button">Create Appointment</a>            
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Doctor</th>
+                <th>Patient</th>
+                <th>Status</th>
+            </tr>
+            {% for appointment in appointments %}
+                <tr>                
+                    <td>
+                        {{appointment.date}}                        
+                    </td>
+                    <td>
+                        {{appointment.time}}
+                    </td>
+                    <td>
+                        {{appointment.doctor_name}}
+                    </td>
+                    <td>
+                        {{appointment.patient_name}}
+                    </td>
+                    <td>
+                        {{appointment.status}}
+                    </td>
+                </tr>
+            {% endfor %}
+            
+        </table>
+    
+    </div>
+{% endblock content %}
+
+
